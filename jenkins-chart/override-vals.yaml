@@ -12,7 +12,7 @@ controller:
     - role-strategy:2.9.0
     - http_request:1.8.22
     - configuration-as-code
-    - clean-workspace:latest
+    - ws-cleanup:0.48
     - dark-theme:479.v661b_1b_911c01
   serviceType: NodePort
   # Optional: Specify a NodePort manually (choose a port between 30000-32767)
