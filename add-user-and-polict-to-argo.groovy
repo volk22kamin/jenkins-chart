@@ -70,7 +70,7 @@ pipeline {
                         sh "git commit -am \"added user\""
                         withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                             sh """
-                                git push https://${USERNAME}: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@github.com/volk22kamin/argoCD.git
+                                git push https://${USERNAME}:<TOKEN>@github.com/volk22kamin/argoCD.git
                             """
                         }
 
