@@ -34,6 +34,14 @@ agent:
             image: waynewu411/docker-cli:1.1
             command: /bin/cat
             ttyEnabled: true
+            volumeMounts:
+            - name: secret-volume
+              mountPath: "/etc/secret"
+              readOnly: true
+        volumes:
+        - name: secret-volume
+          secret:
+            secretName: jenkins-secret
         yamlMergeStrategy: merge
     kaniko-git: |
       - name: kaniko-git
