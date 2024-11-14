@@ -1,0 +1,113 @@
+controller:
+  adminPassword: "123"
+  InstallPlugins:
+    - kubernetes:1.14.3
+    - workflow-aggregator:2.5
+    - workflow-job:2.31
+    - credentials-binding:1.17
+    - git:3.9.3
+    - github-branch-source:2.4.2
+    - pipeline-utility-steps:2.2.0
+    - role-strategy:2.9.0
+    - http_request:1.8.22
+    - configuration-as-code
+    - clean-workspace:latest
+    - dark-theme:479.v661b_1b_911c01
+  serviceType: NodePort
+  # Optional: Specify a NodePort manually (choose a port between 30000-32767)
+  service:
+    nodePort: 32000
+  jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
+agent:
+  volumes:
+  - type: Secret
+    mountPath: /kaniko/.docker
+    secretName: dockerhub-creds
+  podTemplates:
+    argocd: |
+      - name: argocd
+        label: argocd
+        serviceAccount: jenkins
+        containers:
+          - name: argocd
+            image: waynewu411/docker-cli:1.1
+            command: /bin/cat
+            ttyEnabled: true
+        yamlMergeStrategy: merge
+    kaniko-git: |
+      - name: kaniko-git
+        label: kaniko-git
+        serviceAccount: jenkins
+        containers:
+          - name: git
+            image: alpine/git:latest
+            command: /bin/cat
+            ttyEnabled: true
+          - name: kaniko
+            image: gcr.io/kaniko-project/executor:debug
+            command: /busybox/cat
+            ttyEnabled: true
+        yamlMergeStrategy: merge
+        yaml: |-
+          apiVersion: v1
+          kind: Pod
+          spec:
+            containers:
+            - name: kaniko
+              volumeMounts:
+              - name: workspace-volume
+                mountPath: /workspace
+              - name: docker-config
+                mountPath: /kaniko/.docker
+            volumes:
+            - name: workspace-volume
+              emptyDir: {}
+            - name: docker-config
+              secret:
+                secretName: dockerhub-creds
+                items:
+                  - key: .dockerconfigjson
+                    path: config.json
+    kaniko-git-mongo: |
+      - name: kaniko-git-mongo-node
+        label: kaniko-git-mongo-node
+        serviceAccount: jenkins
+        containers:
+          - name: mongodb
+            image: mongo:latest
+            ports:
+              - containerPort: 27017
+          - name: git
+            image: alpine/git:latest
+            command: /bin/cat
+            ttyEnabled: true
+          - name: kaniko
+            image: gcr.io/kaniko-project/executor:debug
+            command: /busybox/cat
+            ttyEnabled: true
+        yamlMergeStrategy: merge
+        yaml: |-
+          apiVersion: v1
+          kind: Pod
+          spec:
+            containers:
+            - name: node
+              image: node:20
+              command: ["/bin/sh", "-c"]
+              args: ["cat"]
+              tty: true
+            - name: kaniko
+              volumeMounts:
+              - name: workspace-volume
+                mountPath: /workspace
+              - name: docker-config
+                mountPath: /kaniko/.docker
+            volumes:
+            - name: workspace-volume
+              emptyDir: {}
+            - name: docker-config
+              secret:
+                secretName: dockerhub-creds
+                items:
+                  - key: .dockerconfigjson
+                    path: config.json
