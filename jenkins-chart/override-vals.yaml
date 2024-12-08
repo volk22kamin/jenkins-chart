@@ -16,8 +16,7 @@ controller:
     - dark-theme:479.v661b_1b_911c01
   serviceType: NodePort
   # Optional: Specify a NodePort manually (choose a port between 30000-32767)
-  service:
-    nodePort: 32000
+  nodePort: 32000
   jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
 agent:
   volumes:
