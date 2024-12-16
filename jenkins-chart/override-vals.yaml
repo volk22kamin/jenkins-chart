@@ -14,7 +14,7 @@ controller:
     - configuration-as-code
     - ws-cleanup
     - dark-theme:479.v661b_1b_911c01
-  serviceType: NodePort
+  serviceType: LoadBalancer
   # Optional: Specify a NodePort manually (choose a port between 30000-32767)
   nodePort: 32000
   jenkinsUrl: "http://jenkins.jenkins.svc.cluster.local:8080"
