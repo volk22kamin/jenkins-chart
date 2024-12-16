@@ -1,4 +1,6 @@
 controller:
+  persistence:
+    storageClass: do-block-storage
   admin:
     password: "123"
   InstallPlugins:
