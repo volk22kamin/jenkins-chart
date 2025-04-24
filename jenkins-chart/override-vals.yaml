@@ -9,8 +9,8 @@ controller:
     - kubernetes:1.14.3
     - ws-cleanup:0.45
     - workflow-aggregator:2.6
-    - workflow-job:2.44
-    - credentials-binding:1.27
+    - workflow-job
+    - credentials-binding
 
 
 
