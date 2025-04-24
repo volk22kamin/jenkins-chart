@@ -4,17 +4,18 @@ controller:
   admin:
     password: "123"
   InstallPlugins:
-    - kubernetes:1.14.3
-    - workflow-aggregator:2.5
-    - workflow-job:2.31
-    - credentials-binding:1.17
-    - git:3.9.3
-    - github-branch-source:2.4.2
-    - pipeline-utility-steps:2.2.0
-    - role-strategy:2.9.0
-    - http_request:1.8.22
+    - kubernetes
+    - workflow-aggregator
+    - credentials-binding
+    - git
+    - github-branch-source
+    - pipeline-utility-steps
+    - role-strategy
+    - http_request
+    - configuration-as-code
     - ws-cleanup
-    - dark-theme:479.v661b_1b_911c01
+    - dark-theme
+
   serviceType: NodePort
   # Optional: Specify a NodePort manually (choose a port between 30000-32767)
   nodePort: 32000
