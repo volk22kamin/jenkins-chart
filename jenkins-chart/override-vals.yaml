@@ -1,8 +1,8 @@
 controller:
   persistence:
     storageClass: do-block-storage
-  admin:
-    password: "123"
+  #admin:
+   # password: "123"
   serviceType: NodePort
   # Optional: Specify a NodePort manually (choose a port between 30000-32767)
   nodePort: 32000
