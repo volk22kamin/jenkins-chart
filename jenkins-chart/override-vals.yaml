@@ -3,21 +3,6 @@ controller:
     storageClass: do-block-storage
   admin:
     password: "123"
-  InstallPlugins:
-    - kubernetes:1.14.3
-    - workflow-aggregator:2.5
-    - workflow-job:2.31
-    - credentials-binding:1.17
-    - git:3.9.3
-    - github-branch-source:2.4.2
-    - pipeline-utility-steps:2.2.0
-    - role-strategy:2.9.0
-    - http_request:1.8.22
-    - configuration-as-code
-    - ws-cleanup
-
-
-
   serviceType: NodePort
   # Optional: Specify a NodePort manually (choose a port between 30000-32767)
   nodePort: 32000
