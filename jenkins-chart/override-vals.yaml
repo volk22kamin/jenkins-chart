@@ -13,7 +13,6 @@ controller:
     - pipeline-utility-steps:2.2.0
     - role-strategy:2.9.0
     - http_request:1.8.22
-    - configuration-as-code:1932.v75cb_b_f1b_698d
     - ws-cleanup
     - dark-theme:479.v661b_1b_911c01
   serviceType: NodePort
